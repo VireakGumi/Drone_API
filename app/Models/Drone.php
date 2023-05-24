@@ -19,7 +19,7 @@ class Drone extends Model
         'fligth_range',
         'weight',
         'location_id',
-        'farmer_id'
+        'user_id'
     ];
 
     public function instructions():BelongsToMany{
@@ -31,7 +31,7 @@ class Drone extends Model
     public function locations():HasMany{
         return $this->hasMany(Location::class);
     }
-    public function farmers():BelongsTo{
-        return $this->belongsTo(Farmer::class);
+    public function users():BelongsTo{
+        return $this->belongsTo(User::class);
     }
 }

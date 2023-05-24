@@ -19,10 +19,10 @@ return new class extends Migration
             $table->integer('battery');
             $table->integer('fligth_range');
             $table->integer('weight');
-            $table->unsignedBigInteger('farmer_id');
-            $table->foreign('farmer_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('farmers')
+                ->on('users')
                 ->onDelete('cascade');  
             $table->timestamps();
         });
