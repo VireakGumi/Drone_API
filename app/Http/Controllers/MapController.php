@@ -64,5 +64,14 @@ class MapController extends Controller
     public function destroy($provinceName, $farmId)
     {
         //
+        $province = Province::where('name', $provinceName)->first();
+        $farms = $province->farms->where('id', $farmId)->first();
+        if ($farms->maps == null) {
+            return response()->json(['Message' => 'Farm number ' . $farmId . ' in ' . $provinceName . " don't have any data to delete", 'status' => 200]);
+        }
+        foreach ($farms->maps as $map) {
+            $map->delete();
+        }
+        return response()->json(['message' => 'Completely delete the images from' . $provinceName . ' in farm number ' . $farmId, 'status' => 200]);
     }
 }
