@@ -18,7 +18,7 @@ class MapController extends Controller
         //
         $maps = Map::all();
         $maps = MapResource::collection($maps);
-        return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $maps , 'status' => 200]);
+        return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $maps, 'status' => 200]);
     }
 
     /**
@@ -27,6 +27,9 @@ class MapController extends Controller
     public function store(MapRequset $request)
     {
         //
+        $map = Map::create($request->all());
+        $map = new MapResource($map);
+        return response()->json(['message' => 'Drone have capture a photo.', 'data' => $map, 'status' => 200]);
     }
 
     /**
@@ -37,7 +40,7 @@ class MapController extends Controller
         //
 
     }
- 
+
     /**
      * Update the specified resource in storage.
      */
