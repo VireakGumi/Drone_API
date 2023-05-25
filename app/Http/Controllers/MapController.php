@@ -38,7 +38,16 @@ class MapController extends Controller
     public function show($provinceName, $farmId)
     {
         //
-
+        $province = Province::where('name', $provinceName)->first();
+        if ($province == null) {
+            return response()->json(['Access' => false, 'message' => 'Undefine province name ' . $provinceName . ' in our data', 'status' => 404]);
+        }
+        $farms = $province->farms->where('id', $farmId)->first();
+        if ($farms == null) {
+            return response()->json(['Access' => false, 'message' => 'Undefine farm number ' . $farmId . ' in our data', 'status' => 404]);
+        }
+        $maps = MapResource::collection($farms->maps);
+        return response()->json(['message' => 'There are all the photos of ' . $provinceName . ' in farm number ' . $farmId, 'data' => $maps, 'status' => 200]);
     }
 
     /**
