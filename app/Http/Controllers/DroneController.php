@@ -49,9 +49,12 @@ class DroneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Drone $drone)
+    public function update(Request $request, Drone $drone, $id)
     {
-        //
+        $drone = Drone::find($id);
+        $drone->update($request->all());
+        return response()->json(['success'=>true,'data'=>$drone]);
+        
     }
 
     /**
