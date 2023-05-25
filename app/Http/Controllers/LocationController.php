@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LocationRequest;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,11 @@ class LocationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LocationRequest $request)
     {
-        //
-    }
+        $drone = Location::create($request->all());
+        return response()->json(['success'=>false,'message'=>$drone]);
+}
 
     /**
      * Display the specified resource.

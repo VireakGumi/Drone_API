@@ -34,6 +34,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public static function store($request){
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        return $user;
+    }
+
     /**
      * The attributes that should be cast.
      *

@@ -21,7 +21,7 @@ class Plan extends Model
     public function farmer():BelongsTo{
         return $this->belongsTo(Farmer::class);
     }
-    public function instructions():BelongsToMany{
-        return $this->belongsToMany(Drone::class,'instruction');
+    public function drones():HasMany{
+        return $this->hasMany(Drone::class,'instruction');
     }
 }

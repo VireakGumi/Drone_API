@@ -24,6 +24,16 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');  
+            $table->unsignedBigInteger('plan_id');
+            $table->foreign('plan_id')
+                ->references('id')
+                ->on('plans')
+                ->onDelete('cascade');  
+            $table->unsignedBigInteger('instruction_id');
+            $table->foreign('instruction_id')
+                ->references('id')
+                ->on('instructions')
+                ->onDelete('cascade');  
             $table->timestamps();
         });
     }

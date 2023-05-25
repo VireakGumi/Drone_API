@@ -13,16 +13,8 @@ return new class extends Migration
     {
         Schema::create('instructions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('drone_id');
-            $table->foreign('drone_id')
-                ->references('id')
-                ->on('drones')
-                ->onDelete('cascade'); 
-            $table->unsignedBigInteger('plan_id');
-            $table->foreign('plan_id')
-                ->references('id')
-                ->on('plans')
-                ->onDelete('cascade'); 
+            $table->string('action');
+            $table->string('description');
             $table->timestamps();
         });
     }
