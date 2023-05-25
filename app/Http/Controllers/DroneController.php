@@ -24,7 +24,7 @@ class DroneController extends Controller
      */
     public function store(Request $request)
     {
-        $drone = Drone::store($request);
+        $drone = Drone::create($request->all());
         return response()->json(['success'=>true,'message'=>"You have create drone"]);
     }
     

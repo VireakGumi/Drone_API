@@ -21,21 +21,10 @@ class Drone extends Model
         'weight',
         'user_id',
         'plan_id',
-        'instruction_id'
+        'instruction_id',
+        'location_id'
     ];
 
-    // static function store($request){
-    //     $drone = Drone::create([
-    //         'name'=> $request->name,
-    //         'type'=> $request->type,
-    //         'payload'=> $request->payload,
-    //         'battery'=> $request->battery,
-    //         'fligth_range'=> $request->fligth_range,
-    //         'weight'=> $request->weight,
-    //         'location_id'=> $request->location_id,
-    //         'user_id'=> $request->user_id,
-    //     ]);
-    // }
 
     public function instruction():BelongsTo{
         return $this->belongsTo(Instruction::class);
@@ -47,8 +36,8 @@ class Drone extends Model
     public function maps():HasMany{
         return $this->hasMany(Map::class);
     }
-    public function locations():HasOne{
-        return $this->hasOne(Location::class);
+    public function location():BelongsTo{
+        return $this->belongsTo(Location::class);
     }
     public function user():BelongsTo{
         return $this->belongsTo(User::class);

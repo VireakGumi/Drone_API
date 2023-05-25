@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-
-class DroneStoreRequest extends FormRequest
+class PlanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,8 +18,10 @@ class DroneStoreRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['success'=>false,'message' => $validator->errors()],412));
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
     }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,16 +30,11 @@ class DroneStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=>"required",
-            "type"=>"required",
-            "payload" =>"required",
-            "battery" =>"required",
-            "flight_range" =>"required",
-            "weight" =>"required",
-            "user_id" =>"required",
-            "plan_id" =>"required",
-            "instruction_id" =>"required",
-            "location_id" =>"required",
+            'type'=>"required",
+            'dateTime'=>"required",
+            'area'=>"required",
+            'spray_density'=>"required",
+            'farm_id'=>"required"
         ];
     }
 }
