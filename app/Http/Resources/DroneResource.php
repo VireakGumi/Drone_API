@@ -24,8 +24,8 @@ class DroneResource extends JsonResource
             'weight'=>$this->weight,
             'user'=>new UserResource($this->user),
             'plan'=>new PlanResource($this->plan),
-            'instruction_id'=>new InstructionResource($this->instruction),
-            'location_id'=>new LocationResource($this->location),
+            'instruction'=>new InstructionResource($this->instruction),
+            'location'=>new LocationResource($this->location),
         ];
     }
 }
