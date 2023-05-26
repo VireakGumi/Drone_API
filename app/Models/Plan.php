@@ -13,15 +13,16 @@ class Plan extends Model
     use HasFactory;
     protected $fillable = [
         'type',
+        'name',
         'dateTime',
         'area',
         'spray_density',
         'farm_id'
     ];
-    public function farmer():BelongsTo{
-        return $this->belongsTo(Farmer::class);
+    public function farm():BelongsTo{
+        return $this->belongsTo(Farm::class);
     }
-    public function instructions():BelongsToMany{
-        return $this->belongsToMany(Drone::class,'instruction');
+    public function drone():HasMany{
+        return $this->hasMany(Drone::class);
     }
 }

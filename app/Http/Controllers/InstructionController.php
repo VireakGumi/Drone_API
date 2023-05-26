@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InstructionResource;
+use App\Models\Drone;
 use App\Models\Instruction;
 use Illuminate\Http\Request;
 
@@ -26,9 +28,10 @@ class InstructionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Instruction $instruction)
+    public function show($drone_id)
     {
         //
+
     }
 
     /**

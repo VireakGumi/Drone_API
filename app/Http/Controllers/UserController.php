@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,5 +48,40 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    /**
+     * REGISTER
+     */
+    public function register(UserRequest $request)
+    {
+        $user = User::store($request);
+
+        $token = $user->createToken("API Token")->plainTextToken;
+        return response()->json([
+            "user"=>$user,
+            "token"=>$token
+        ]);
+
+    }
+
+    public function login(UserLoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('API Token')->plainTextToken;
+            return response()->json([
+                'user' => $user,
+                'token' => $token
+            ]);
+        }
+        return response()->json([
+            'message' => 'Invalid credentials'
+        ], 401);
+    }
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json(['message' => 'Logged out successfully']);
     }
 }

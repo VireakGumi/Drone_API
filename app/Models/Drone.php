@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Drone extends Model
 {
@@ -18,20 +19,27 @@ class Drone extends Model
         'battery',
         'fligth_range',
         'weight',
-        'location_id',
-        'user_id'
+        'user_id',
+        'plan_id',
+        'instruction_id',
+        'location_id'
     ];
 
-    public function instructions():BelongsToMany{
-        return $this->belongsToMany(Plan::class,'instruction');
+
+    public function instruction():BelongsTo{
+        return $this->belongsTo(Instruction::class);
+    }
+
+    public function plan():BelongsTo{
+        return $this->belongsTo(Plan::class);
     }
     public function maps():HasMany{
         return $this->hasMany(Map::class);
     }
-    public function locations():HasMany{
-        return $this->hasMany(Location::class);
+    public function location():BelongsTo{
+        return $this->belongsTo(Location::class);
     }
-    public function users():BelongsTo{
+    public function user():BelongsTo{
         return $this->belongsTo(User::class);
     }
 }
