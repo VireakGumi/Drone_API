@@ -51,6 +51,7 @@ Route::post('/locations',[LocationController::class,'store']);
 Route::get('/maps', [MapController::class, 'index']);
 
 Route::get('/instructions/{drone_id}', [InstructionController::class, 'show']);
+Route::get('/plans/{planName}', [PlanController::class, 'show']);
 
 Route::post('/maps', [MapController::class, 'store']);
 
