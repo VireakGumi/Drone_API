@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/drones/{id}',[DroneController::class,'destroy']);
     Route::get('/drones/{id}/location',[DroneController::class,'showLocation']);
     Route::post('/drones',[DroneController::class,'store']);
-    Route::put('/drones/{id}/',[DroneController::class,'update']);
+    Route::put('/drones/{id}',[DroneController::class,'update']);
     Route::put('/dronesInstruct/{id}',[DroneController::class,'updateInstruct']);
 
     // plan--------------------
@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/maps/{provinceName}/{farmId}', [MapController::class, 'show']);
     Route::delete('/maps/{provinceName}/{farmId}', [MapController::class, 'destroy']);
     // instruction -----------------
+    Route::get('/instructions', [InstructionController::class, 'index']);
     Route::get('/instructions/{drone_id}', [InstructionController::class, 'show']);
 
     // location----------------------
