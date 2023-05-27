@@ -18,7 +18,10 @@ class MapController extends Controller
         //
         $maps = Map::all();
         $maps = MapResource::collection($maps);
-        return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $maps, 'status' => 200]);
+        if($maps != null) {
+            return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $maps, 'status' => 200]);
+        }
+        return response()->json(['message' => "Right now, in our data don't have any image", 'status' => 401]);
     }
 
     /**
@@ -40,11 +43,11 @@ class MapController extends Controller
         //
         $province = Province::where('name', $provinceName)->first();
         if ($province == null) {
-            return response()->json(['Access' => false, 'message' => 'Undefine province name ' . $provinceName . ' in our data', 'status' => 404]);
+            return response()->json(['Access' => false, 'message' => 'Undefine province name ' . $provinceName . ' in our data', 'status' => 401]);
         }
         $farms = $province->farms->where('id', $farmId)->first();
         if ($farms == null) {
-            return response()->json(['Access' => false, 'message' => 'Undefine farm number ' . $farmId . ' in our data', 'status' => 404]);
+            return response()->json(['Access' => false, 'message' => 'Undefine farm number ' . $farmId . ' in our data', 'status' => 401]);
         }
         $maps = MapResource::collection($farms->maps);
         return response()->json(['message' => 'There are all the photos of ' . $provinceName . ' in farm number ' . $farmId, 'data' => $maps, 'status' => 200]);
@@ -67,7 +70,7 @@ class MapController extends Controller
         $province = Province::where('name', $provinceName)->first();
         $farms = $province->farms->where('id', $farmId)->first();
         if ($farms->maps == null) {
-            return response()->json(['Message' => 'Farm number ' . $farmId . ' in ' . $provinceName . " don't have any data to delete", 'status' => 200]);
+            return response()->json(['Message' => 'Farm number ' . $farmId . ' in ' . $provinceName . " don't have any data to delete", 'status' => 401]);
         }
         foreach ($farms->maps as $map) {
             $map->delete();

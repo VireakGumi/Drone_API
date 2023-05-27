@@ -59,9 +59,9 @@ class UserController extends Controller
 
         $token = $user->createToken("API Token")->plainTextToken;
         return response()->json([
-            'user' => new UserResource($user),
-            'token' => $token
-        ]);
+            "user"=>new UserResource($user),
+            "token"=>$token
+        ],200);
 
     }
 
@@ -74,7 +74,7 @@ class UserController extends Controller
             return response()->json([
                 'user' => new UserResource($user),
                 'token' => $token
-            ]);
+            ],200);
         }
         return response()->json([
             'message' => 'Invalid credentials'
@@ -83,6 +83,6 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-        return response()->json(['message' => 'Logged out successfully']);
+        return response()->json(['message' => 'Logged out successfully', 'status' => 200]);
     }
 }
