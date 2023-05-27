@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +59,8 @@ class UserController extends Controller
 
         $token = $user->createToken("API Token")->plainTextToken;
         return response()->json([
-            "user"=>$user,
-            "token"=>$token
+            'user' => new UserResource($user),
+            'token' => $token
         ]);
 
     }
@@ -67,13 +68,12 @@ class UserController extends Controller
     public function login(UserLoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        // dd(Auth::attempt($credentials));
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             // dd($user->createToken('API Token')->plainTextToken);
             $token = $user->createToken('API Token')->plainTextToken;
             return response()->json([
-                'user' => $user,
+                'user' => new UserResource($user),
                 'token' => $token
             ]);
         }

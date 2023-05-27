@@ -25,13 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout',[UserController::class,'logout']);
     
+    Route::get('/drones',[DroneController::class,'index']);
 });
 
 Route::post('/register',[UserController::class,'register']);
 Route::post('/login',[UserController::class,'login']);
 
 
-Route::get('/drones',[DroneController::class,'index']);
 Route::get('/drones/{id}',[DroneController::class,'show']);
 Route::get('/drones/{id}/location',[DroneController::class,'showLocation']);
 Route::post('/drones',[DroneController::class,'store']);
