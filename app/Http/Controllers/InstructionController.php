@@ -33,10 +33,11 @@ class InstructionController extends Controller
         //
         $drone = Drone::find($drone_id);
         $instruct = $drone->instruction;
+        $instruct->drone_id = $drone->id;
         if($instruct != null) {
-            return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => new InstructionResource($instruct), 'status' => 200]);
+            return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $instruct, 'status' => 200]);
         }
-        return response()->json(['message' => "Your drone don't have an instruction!",'status' => 200]);
+        return response()->json(['message' => "Your drone don't have an instruction!",'status' => 401]);
 
     }
 

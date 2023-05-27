@@ -24,10 +24,9 @@ class PlanController extends Controller
     {
         //
         $plan = new PlanResource(Plan::create($request->all()));
-        return response()->json(['success'=>true, 'data' => $plan, 'message'=>"You have created a new plan"]);
+        return response()->json(['success'=>true, 'data' => $plan, 'message'=>"You have created a new plan", 'status' => 200]);
         
     }
-    
     /**
      * Display the specified resource.
      */
@@ -35,7 +34,10 @@ class PlanController extends Controller
     {
         //
         $plan = Plan::where('name', $planName)->first();
-        return response()->json(['success'=>true, 'data' => new PlanResource($plan), 'message'=>"Here is a plan with name $planName"]);
+        if($plan != null) {
+            return response()->json(['success'=>true, 'data' => new PlanResource($plan), 'message'=>"Here is a plan with name $planName", 'status' => 200]);
+        }
+        return response()->json(['success'=> false, 'message'=>"Not found plan name $planName", 'status' => 401]);
     }
 
     /**

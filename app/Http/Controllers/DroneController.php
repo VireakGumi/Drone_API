@@ -19,7 +19,10 @@ class DroneController extends Controller
     {
         $drones = Drone::all();
         $drones = DroneResource::collection($drones);
-        return response()->json(["success"=>true, "data"=>$drones],200);
+        if($drones != null) {
+            return response()->json(["success"=>true, "data"=>$drones],200);
+        }
+        return response()->json(["success"=>false, "message" => "You don't any drone"],401);
 
     }
 
@@ -29,8 +32,10 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         $drone = Drone::create($request->all());
-        return response()->json(['success'=>true, 'data' => $drone, 'message'=>"You have create drone"]);
+        $drone = new DroneResource($drone);
+        return response()->json(['success'=>true, 'data' => $drone, 'message'=>"You have create drone", 'status' => 200]);
     }
+    
     
     /**
      * Display the specified resource.
@@ -39,14 +44,18 @@ class DroneController extends Controller
     {
         $drone = Drone::find($id);
         $drone = new DroneResource($drone);
-        return response()->json(['success'=>true,'data'=>$drone]);
+        if ($drone != null){
+            return response()->json(['success'=>true,'data'=>$drone]);
+        }
+        return response()->json(["success"=>false, "message" => "You don't any drone with an id $id"],401);
+
     }
 
     public function showLocation(Drone $drone,$id)
     {
         $drone = Drone::find($id);
         $droneLocation = new LocationResource($drone->location);
-        return response()->json(['success'=>true,'data'=>$droneLocation]);
+        return response()->json(['success'=>true,'data'=>$droneLocation, 'status' => 200]);
     }
 
     /**
@@ -56,15 +65,18 @@ class DroneController extends Controller
     {
         $drone = Drone::find($id);
         $drone->update($request->all());
-        return response()->json(['success'=>true,'data'=>new DroneResource($drone)]);
+        return response()->json(['success'=>true,'data'=>new DroneResource($drone), 'status' => 200]);
         
     }
     public function updateInstruct(InstructionRequest $request , $id)
     {
         $drone = Drone::find($id);
-        $instruct = $drone->instruction;            
-        $instruct->update($request->all());
-        return response()->json(['success'=>true,'data'=>new InstructionResource($instruct)]);
+        $instruct = $drone->instruction;   
+        if($instruct != null){
+            $instruct->update($request->all());
+            return response()->json(['success'=>true,'data'=>new InstructionResource($instruct), 'status' => 200]);
+        }         
+        return response()->json(['success'=>false, 'status' => 401]);
         
     }
 

@@ -13,6 +13,10 @@ class Instruction extends Model
         'action',
         'description'
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 
     public function drone():HasOne{
         return $this->hasOne(Drone::class);
