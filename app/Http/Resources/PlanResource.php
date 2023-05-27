@@ -21,7 +21,6 @@ class PlanResource extends JsonResource
             'area'=>$this->area,
             'spray_density'=>$this->spray_density,
             'farm'=> new FarmResource($this->farm)
-            // 'farm'=> $this->farm
         ];
     }
 }

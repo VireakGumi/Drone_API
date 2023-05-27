@@ -9,6 +9,7 @@ use App\Http\Resources\LocationResource;
 use App\Models\Drone;
 use App\Models\Instruction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DroneController extends Controller
 {
@@ -17,10 +18,9 @@ class DroneController extends Controller
      */
     public function index()
     {
-        $drones = Drone::all();
+        $drones = Auth::user()->drones;
         $drones = DroneResource::collection($drones);
         return response()->json(["success"=>true, "data"=>$drones],200);
-
     }
 
     /**
@@ -29,7 +29,7 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         $drone = Drone::create($request->all());
-        return response()->json(['success'=>true,'message'=>"You have create drone"]);
+        return response()->json(['success'=>true, 'data' => $drone, 'message'=>"You have create drone"]);
     }
     
     /**
@@ -55,15 +55,14 @@ class DroneController extends Controller
     public function update(Request $request, Drone $drone, $id)
     {
         $drone = Drone::find($id);
-        dd($drone);
-        // $drone->update($request->all());
+        $drone->update($request->all());
         return response()->json(['success'=>true,'data'=>new DroneResource($drone)]);
         
     }
     public function updateInstruct(InstructionRequest $request , $id)
     {
         $drone = Drone::find($id);
-        $instruct = $drone->instruction;
+        $instruct = $drone->instruction;            
         $instruct->update($request->all());
         return response()->json(['success'=>true,'data'=>new InstructionResource($instruct)]);
         

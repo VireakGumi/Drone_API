@@ -30,10 +30,11 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'=>"required",
+            'type'=>"required|unique",
+            'name'=>'required',
             'dateTime'=>"required",
             'area'=>"required",
-            'spray_density'=>"required",
+            'spray_density'=>"required|min: 0|max: 100",
             'farm_id'=>"required"
         ];
     }

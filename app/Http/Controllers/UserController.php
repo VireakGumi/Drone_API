@@ -70,7 +70,6 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            // dd($user->createToken('API Token')->plainTextToken);
             $token = $user->createToken('API Token')->plainTextToken;
             return response()->json([
                 'user' => new UserResource($user),

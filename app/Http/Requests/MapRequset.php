@@ -4,11 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-
-class UserLoginRequest extends FormRequest
+class MapRequset extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,11 +16,9 @@ class UserLoginRequest extends FormRequest
     {
         return true;
     }
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+    protected function failedValidation(Validator $validator){
+        throw new HttpResponseException(response()->json(["success"=>false, "message"=>$validator->errors()], 412));
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,10 +27,10 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required',
-           
+            //
+            'image' => ['required'],
+            'drone_id' => ['required'],
+            'farm_id' => ['required'],
         ];
-        
     }
 }

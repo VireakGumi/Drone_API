@@ -13,6 +13,7 @@ class Plan extends Model
     use HasFactory;
     protected $fillable = [
         'type',
+        'name',
         'dateTime',
         'area',
         'spray_density',

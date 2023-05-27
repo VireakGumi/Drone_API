@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
                         "required"
                     ],
             "email"=>[
-                        "required",
+                        "required","email",
                         Rule::unique("users")->ignore($this->id)
                     ],
             "password" =>[

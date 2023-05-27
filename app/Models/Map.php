@@ -11,17 +11,15 @@ class Map extends Model
     use HasFactory;
     protected $fillable = [
         'image',
-        'province_id',
         'drone_id',
         'farm_id'
     ];
     public function drone():BelongsTo{
         return $this->belongsTo(Drone::class);
     }
-    public function province():BelongsTo{
-        return $this->belongsTo(Province::class);
-    }
+
     public function farm():BelongsTo{
         return $this->belongsTo(Farm::class);
     }
+
 }
