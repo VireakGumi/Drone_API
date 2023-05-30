@@ -19,11 +19,11 @@ class DroneController extends Controller
     public function index()
     {
         $drones = Auth::user()->drones;
-        $drones = DroneResource::collection($drones);
-        if($drones != null) {
+        if($drones->count() > 0) {
+            $drones = DroneResource::collection($drones);
             return response()->json(["success"=>true, "data"=>$drones],200);
         }
-        return response()->json(["success"=>false, "message" => "You don't any drone"],401);
+        return response()->json(["success"=>false, "message" => "You don't angiy drone"],401);
 
     }
 
@@ -44,8 +44,8 @@ class DroneController extends Controller
     public function show(Drone $drone,$id)
     {
         $drone = Auth::user()->drones->find($id);
-        $drone = new DroneResource($drone);
         if ($drone != null){
+            $drone = new DroneResource($drone);
             return response()->json(['success'=>true,'data'=>$drone]);
         }
         return response()->json(["success"=>false, "message" => "You don't any drone with an id $id"],401);

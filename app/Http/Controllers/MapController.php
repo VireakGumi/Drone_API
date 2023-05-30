@@ -17,8 +17,8 @@ class MapController extends Controller
     {
         //
         $maps = Map::all();
-        $maps = MapResource::collection($maps);
-        if($maps != null) {
+        if($maps->count() > 0) {
+            $maps = MapResource::collection($maps);
             return response()->json(['message' => 'Here are the images that drone camera have made.', 'data' => $maps, 'status' => 200]);
         }
         return response()->json(['message' => "Right now, in our data don't have any image", 'status' => 401]);
@@ -69,12 +69,12 @@ class MapController extends Controller
         //
         $province = Province::where('name', $provinceName)->first();
         $farms = $province->farms->where('id', $farmId)->first();
-        if ($farms->maps == null) {
+        if ($farms->maps->count() == 0) {
             return response()->json(['Message' => 'Farm number ' . $farmId . ' in ' . $provinceName . " don't have any data to delete", 'status' => 401]);
         }
         foreach ($farms->maps as $map) {
             $map->delete();
         }
-        return response()->json(['message' => 'Completely delete the images from' . $provinceName . ' in farm number ' . $farmId, 'status' => 200]);
+        return response()->json(['message' => 'Completely delete the images from ' . $provinceName . ' in farm number ' . $farmId, 'status' => 200]);
     }
 }

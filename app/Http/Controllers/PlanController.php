@@ -23,7 +23,8 @@ class PlanController extends Controller
     public function store(PlanRequest $request)
     {
         //
-        $plan = new PlanResource(Plan::create($request->all()));
+        $plan = Plan::create($request->all());
+        $plan = new PlanResource($plan);
         return response()->json(['success'=>true, 'data' => $plan, 'message'=>"You have created a new plan", 'status' => 200]);
         
     }
