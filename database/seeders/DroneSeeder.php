@@ -18,16 +18,16 @@ class DroneSeeder extends Seeder
             'weight'=>10,'user_id'=>1,'plan_id'=>1,'instruction_id'=>1,'location_id'=>1],
 
             ['name'=>"D2",'type'=>"spraying",'payload'=>10,'battery'=>100,'fligth_range'=>10,
-            'weight'=>10,'user_id'=>1,'plan_id'=>1,'instruction_id'=>2,'location_id'=>1],
+            'weight'=>10,'user_id'=>1,'plan_id'=>1,'instruction_id'=>1,'location_id'=>1],
 
             ['name'=>"D3",'type'=>"sensing",'payload'=>10,'battery'=>100,'fligth_range'=>10,
-            'weight'=>10,'user_id'=>1,'plan_id'=>1,'instruction_id'=>3,'location_id'=>1],
+            'weight'=>10,'user_id'=>1,'plan_id'=>1,'instruction_id'=>2,'location_id'=>1],
 
             ['name'=>"D4",'type'=>"harvesting",'payload'=>10,'battery'=>100,'fligth_range'=>10,
-            'weight'=>10,'user_id'=>2,'plan_id'=>1,'instruction_id'=>4,'location_id'=>1],
+            'weight'=>10,'user_id'=>2,'plan_id'=>1,'instruction_id'=>2,'location_id'=>1],
 
             ['name'=>"D5",'type'=>"mapping",'payload'=>10,'battery'=>100,'fligth_range'=>10,
-            'weight'=>10,'user_id'=>2,'plan_id'=>1,'instruction_id'=>5,'location_id'=>1],
+            'weight'=>10,'user_id'=>2,'plan_id'=>1,'instruction_id'=>1,'location_id'=>1],
         ];
 
         foreach ($drones as $drone){

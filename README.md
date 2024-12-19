@@ -69,8 +69,6 @@ composer install (for installing packages)
 
 php artisan key:generate (for generating key applications)
 
-php artisan storage:link (for link storage folder)
-
 php artisan migrate (for migrating database)
 
 php artisan db:seed (for creating data)

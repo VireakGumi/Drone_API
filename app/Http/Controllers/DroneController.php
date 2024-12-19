@@ -78,16 +78,12 @@ class DroneController extends Controller
     }
     public function updateInstruct(InstructionRequest $request , $id)
     {
-        $drone = Auth::user()->drones->find($id);
-        if ($drone != null){
-            $instruct = $drone->instruction;   
+        $instruct = Instruction::find($id);   
             if($instruct != null){
                 $instruct->update($request->all());
                 return response()->json(['success'=>true,'data'=>new InstructionResource($instruct), 'status' => 200]);
             }         
             return response()->json(['success'=>false, 'status' => 401]);
-        }
-        return response()->json(["success"=>false, "message" => "You don't any drone with an id $id"],401);
     }
 
 

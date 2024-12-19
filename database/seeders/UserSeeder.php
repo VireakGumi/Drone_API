@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     {
 
         $users = [
-            ['name'=>'rice','email'=>"rice@gmai.com",'password'=>12345678],
-            ['name'=>'pujgphum','email'=>"pujgphum@gmai.com",'password'=>12345678],
+            ['name'=>'rice','email'=>"rice@gmail.com",'password'=>12345678],
+            ['name'=>'pujgphum','email'=>"pujgphum@gmail.com",'password'=>12345678],
         ];
         foreach ($users as $user){
             User::create($user);

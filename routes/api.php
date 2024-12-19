@@ -34,13 +34,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/drones',[DroneController::class,'index']);
     Route::get('/drones/{id}',[DroneController::class,'show']);
     Route::delete('/drones/{id}',[DroneController::class,'destroy']);
-    Route::get('/drones/{id}/location',[DroneController::class,'showLocation']);
     Route::post('/drones',[DroneController::class,'store']);
     Route::put('/drones/{id}',[DroneController::class,'update']);
+    
+    Route::get('/drones/{id}/location',[DroneController::class,'showLocation']);
     Route::put('/dronesInstruct/{id}',[DroneController::class,'updateInstruct']);
-
     // plan--------------------
-    Route::post('/plans/plan', [PlanController::class, 'store']);
+    Route::post('/plans', [PlanController::class, 'store']);
     Route::get('/plans/{planName}', [PlanController::class, 'show']);
 
     // map -----------------------
@@ -53,14 +53,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/instructions/{drone_id}', [InstructionController::class, 'show']);
 
     // location----------------------
-    Route::post('/locations',[LocationController::class,'store']);
+    Route::post('/locations', [LocationController::class, 'store']);
 });
 
-Route::post('/register',[UserController::class,'register']);
-Route::post('/login',[UserController::class,'login']);
-
-
-
-
-
-
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);

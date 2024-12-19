@@ -16,9 +16,7 @@ class InstructionSeeder extends Seeder
         $instructions = [
             ['action'=>'run','description'=>'run drone on the farm'],
             ['action'=>'stop','description'=>'stop drone and go home'],
-            ['action'=>'run','description'=>'run drone on the farm'],
-            ['action'=>'run','description'=>'run drone on the farm'],
-            ['action'=>'stop','description'=>'stop drone and go home'],
+            ['action'=>'other','description'=>'the drone just stopped because the instruction is not run or stop it was 1 to tell drone to run and 2 is to stop'],
         ];
 
         foreach ($instructions as $instruction){
